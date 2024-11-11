@@ -22,7 +22,6 @@ def test_mutant_check_non_mutant(client):
 
     }), content_type='application/json')
 
-    # Debería devolver 403 si no es mutante
     assert response.status_code == 403
     assert response.get_json() == {"message": "Not a mutant"}
 

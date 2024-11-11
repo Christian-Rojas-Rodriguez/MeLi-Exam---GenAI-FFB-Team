@@ -1,15 +1,12 @@
-runtime: python312  # Define la versión de Python
-entrypoint: gunicorn -b :$PORT main:app  # Usa gunicorn para ejecutar la app en producción
+runtime: python312
+entrypoint: gunicorn -b :$PORT main:app
 
-# Clase de instancia F1 para plan gratuito
 instance_class: F1
 
-# Configuración de escalado automático
 automatic_scaling:
   max_instances: 1
   min_instances: 0
 
-# Configuración de archivos estáticos si fueran necesarios
 handlers:
 - url: /mutant
   script: auto
