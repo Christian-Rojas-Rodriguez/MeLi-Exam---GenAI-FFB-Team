@@ -24,14 +24,20 @@ def init_db():
     conn.close()
 
 
-def save_dna_record(dna_sequence, is_mutant):
-    conn = sqlite3.connect('database.db')
-    cursor = conn.cursor()
-    cursor.execute('INSERT INTO dna_records (sequence, is_mutant) VALUES (?, ?)',
-                   (','.join(dna_sequence), is_mutant))
-    conn.commit()
-    conn.close()
-
+def save_dna_record(dna_sequence, is_mutant, conn=None):
+    if conn is None:
+        conn = sqlite3.connect('database.db')  # Usa una conexión predeterminada si no se proporciona una
+        cursor = conn.cursor()
+        cursor.execute('INSERT INTO dna_records (sequence, is_mutant) VALUES (?, ?)',
+                       (','.join(dna_sequence), is_mutant))
+        conn.commit()
+        conn.close()  # Cierra la conexión solo si fue creada internamente
+    else:
+        # Usa la conexión proporcionada externamente (no la cierra)
+        cursor = conn.cursor()
+        cursor.execute('INSERT INTO dna_records (sequence, is_mutant) VALUES (?, ?)',
+                       (','.join(dna_sequence), is_mutant))
+        conn.commit()
 
 def save_dna_record(dna, is_mutant):
     conn = get_db_connection()
