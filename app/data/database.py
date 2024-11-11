@@ -5,6 +5,34 @@ def get_db_connection():
     conn.row_factory = sqlite3.Row
     return conn
 
+
+def init_db():
+    # Conecta a la base de datos (crea el archivo si no existe)
+    conn = sqlite3.connect('database.db')
+    cursor = conn.cursor()
+
+    # Crea la tabla `dna_records` si no existe
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS dna_records (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            sequence TEXT NOT NULL,
+            is_mutant BOOLEAN NOT NULL
+        )
+    ''')
+
+    conn.commit()
+    conn.close()
+
+
+def save_dna_record(dna_sequence, is_mutant):
+    conn = sqlite3.connect('database.db')
+    cursor = conn.cursor()
+    cursor.execute('INSERT INTO dna_records (sequence, is_mutant) VALUES (?, ?)',
+                   (','.join(dna_sequence), is_mutant))
+    conn.commit()
+    conn.close()
+
+
 def save_dna_record(dna, is_mutant):
     conn = get_db_connection()
     conn.execute('INSERT INTO dna_records (sequence, is_mutant) VALUES (?, ?)',

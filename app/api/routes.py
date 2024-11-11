@@ -3,7 +3,7 @@ from app.services.mutant_service import check_mutant, get_stats
 
 api_bp = Blueprint('api', __name__)
 
-@api_bp.route('gcloud app deploy', methods=['POST'])
+@api_bp.route('/mutant', methods=['POST'])
 def mutant_check():
     data = request.get_json()
     dna = data.get("dna", [])
