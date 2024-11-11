@@ -61,7 +61,7 @@ In the mutant example, there are multiple sequences of four identical letters in
 This is a Flask-based API to detect if a given DNA sequence belongs to a mutant. The project is designed for local development and testing, and it's deployed on Render for production.
 
 ## Prerequisites
-- Python 3.8 or later
+- Python 3.12
 - Virtualenv or similar environment manager
 - Docker Client (optional, for database setup)
 - Render account for deployment (or you can use another service)
@@ -100,11 +100,6 @@ The application will be available at `http://127.0.0.1:5000`
 ### 2.Using Postman or similar tools:
 - Make a POST request to `http://127.0.0.1:5000/mutant` with a JSON body to check if the DNA is mutant.
 - Make a GET request to `http://127.0.0.1:5000/stats` to retrieve stats.
-
-## Database Setup
-The application uses an SQLite database by default. For local testing, no additional setup is required. If you wish to run MySQL locally, use Docker:
-
-    docker run -e MYSQL_ROOT_PASSWORD=test -e MYSQL_DATABASE=testdb -p 3306:3306 mysql:latest
     
 ## Deployment on Render
 This API is deployed on Render. Follow these steps for deployment:
