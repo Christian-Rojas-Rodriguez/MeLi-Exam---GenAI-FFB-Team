@@ -40,12 +40,16 @@ def save_dna_record(dna_sequence, is_mutant, conn=None):
         conn.commit()
 
 
-def get_statistics():
-    conn = get_db_connection()
+def get_statistics(conn=None):
+    if conn is None:
+        conn = get_db_connection()  # Usa la conexión predeterminada si no se proporciona una conexión
     cursor = conn.cursor()
     total_count = cursor.execute('SELECT COUNT(*) FROM dna_records').fetchone()[0]
     mutant_count = cursor.execute('SELECT COUNT(*) FROM dna_records WHERE is_mutant = 1').fetchone()[0]
-    conn.close()
+
+    if conn != get_db_connection():  # Solo cierra la conexión si fue creada internamente
+        conn.close()
+
     return {
         "count_mutant_dna": mutant_count,
         "count_human_dna": total_count - mutant_count,
