@@ -39,12 +39,6 @@ def save_dna_record(dna_sequence, is_mutant, conn=None):
                        (','.join(dna_sequence), is_mutant))
         conn.commit()
 
-def save_dna_record(dna, is_mutant):
-    conn = get_db_connection()
-    conn.execute('INSERT INTO dna_records (sequence, is_mutant) VALUES (?, ?)',
-                 (",".join(dna), int(is_mutant)))
-    conn.commit()
-    conn.close()
 
 def get_statistics():
     conn = get_db_connection()

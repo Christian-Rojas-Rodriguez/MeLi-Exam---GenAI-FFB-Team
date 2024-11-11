@@ -24,7 +24,7 @@ def test_init_db(setup_database):
 
 def test_save_dna_record(setup_database):
     conn = setup_database
-    dna_sequence = ["ATGCGA", "CAGTGC", "TTATGT", "AGAAGG", "CCCCTA", "TCACTG"]
+    dna_sequence = ["ATGCGA", "CAGTGC", "TTCTGT", "AGAACG", "TCCGTG", "TCACTG"]
     save_dna_record(dna_sequence, True, conn)  # Pasa la conexión de prueba
 
     # Verifica que el registro fue guardado en la conexión de prueba
